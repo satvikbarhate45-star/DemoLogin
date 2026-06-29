@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#0f172a,#2563eb,#7c3aed);
+            overflow:hidden;
+            position:relative;
+        }
+
+        /* Floating Circles */
+        .circle{
+            position:absolute;
+            border-radius:50%;
+            background:rgba(255,255,255,0.10);
+            animation:float 7s infinite ease-in-out;
+        }
+
+        .c1{
+            width:250px;
+            height:250px;
+            top:-80px;
+            left:-80px;
+        }
+
+        .c2{
+            width:300px;
+            height:300px;
+            bottom:-100px;
+            right:-100px;
+            animation-delay:2s;
+        }
+
+        .c3{
+            width:150px;
+            height:150px;
+            top:50%;
+            left:10%;
+            animation-delay:4s;
+        }
+
+        /* Navbar */
+        .navbar{
+            width:100%;
+            padding:20px 8%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:relative;
+            z-index:10;
+        }
+
+        .logo{
+            color:#fff;
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        .logout-btn{
+            text-decoration:none;
+            color:#2563eb;
+            background:#fff;
+            padding:10px 20px;
+            border-radius:10px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .logout-btn:hover{
+            transform:translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero{
+            min-height:85vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:20px;
+            position:relative;
+            z-index:10;
+        }
+
+        .card{
+            width:100%;
+            max-width:700px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(15px);
+            border-radius:25px;
+            padding:60px 40px;
+            box-shadow:0 15px 35px rgba(0,0,0,0.25);
+            animation:fadeUp 1s ease;
+        }
+
+        .card h1{
+            color:#fff;
+            font-size:45px;
+            margin-bottom:20px;
+        }
+
+        .card p{
+            color:#e5e5e5;
+            font-size:18px;
+            line-height:30px;
+            margin-bottom:35px;
+        }
+
+        .btn{
+            text-decoration:none;
+            background:#fff;
+            color:#2563eb;
+            padding:15px 35px;
+            border-radius:12px;
+            font-size:17px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:translateY(-5px);
+        }
+
+        @keyframes fadeUp{
+            from{
+                opacity:0;
+                transform:translateY(50px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        @keyframes float{
+            50%{
+                transform:translateY(-30px);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media(max-width:768px){
+
+            .navbar{
+                padding:20px;
+            }
+
+            .logo{
+                font-size:24px;
+            }
+
+            .card{
+                padding:40px 25px;
+            }
+
+            .card h1{
+                font-size:32px;
+            }
+
+            .card p{
+                font-size:16px;
+                line-height:28px;
+            }
+
+            .btn{
+                padding:13px 28px;
+                font-size:15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">DemoLogin</div>
+        <a href="{% url 'login' %}" class="logout-btn">Logout</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="card">
+            <h1>Welcome{% if user %}, {{ user.first_name }}{% endif %} 👋</h1>
+
+            <p>
+                You have successfully logged in to the Demo Login System.
+                This responsive dashboard is built using Django, PostgreSQL,
+                Glassmorphism UI, and CSS animations for a modern user experience.
+            </p>
+
+            <a href="{% url 'register' %}" class="btn">
+                Create Another Account
+            </a>
+        </div>
+    </section>
+
+</body>
+</html>

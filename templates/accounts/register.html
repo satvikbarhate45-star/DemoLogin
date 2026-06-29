@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0f172a,#2563eb,#7c3aed);
+            overflow:hidden;
+            padding:20px;
+        }
+
+        /* Floating Background Shapes */
+        .circle{
+            position:absolute;
+            border-radius:50%;
+            background:rgba(255,255,255,0.12);
+            animation:float 6s infinite ease-in-out;
+        }
+
+        .c1{
+            width:220px;
+            height:220px;
+            top:8%;
+            left:8%;
+        }
+
+        .c2{
+            width:280px;
+            height:280px;
+            bottom:8%;
+            right:8%;
+            animation-delay:2s;
+        }
+
+        /* Glass Card */
+        .card{
+            width:100%;
+            max-width:450px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(15px);
+            border-radius:20px;
+            box-shadow:0 15px 35px rgba(0,0,0,0.3);
+            padding:40px 35px;
+            z-index:1;
+            animation:fadeUp 1s ease;
+        }
+
+        .card h2{
+            color:#fff;
+            text-align:center;
+            margin-bottom:30px;
+            font-size:32px;
+        }
+
+        .input-box{
+            margin-bottom:18px;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:15px;
+            border:none;
+            outline:none;
+            border-radius:12px;
+            background:rgba(255,255,255,0.18);
+            color:#fff;
+            font-size:16px;
+        }
+
+        .input-box input::placeholder{
+            color:#ddd;
+        }
+
+        .btn{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            background:#fff;
+            color:#2563eb;
+            font-size:17px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.4s;
+            margin-top:10px;
+        }
+
+        .btn:hover{
+            transform:translateY(-4px);
+        }
+
+        .link{
+            text-align:center;
+            margin-top:22px;
+            color:#fff;
+        }
+
+        .link a{
+            color:#fff;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .link a:hover{
+            text-decoration:underline;
+        }
+
+        @keyframes fadeUp{
+            from{
+                opacity:0;
+                transform:translateY(50px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        @keyframes float{
+            50%{
+                transform:translateY(-30px);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media(max-width:576px){
+
+            .card{
+                padding:30px 20px;
+            }
+
+            .card h2{
+                font-size:28px;
+            }
+
+            .input-box input,
+            .btn{
+                padding:13px;
+                font-size:15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <!-- Registration Card -->
+    <div class="card">
+        <h2>Create Account</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-box">
+                <input type="text" name="first_name"
+                       placeholder="First Name" required>
+            </div>
+
+            <div class="input-box">
+                <input type="text" name="last_name"
+                       placeholder="Last Name" required>
+            </div>
+
+            <div class="input-box">
+                <input type="email" name="email"
+                       placeholder="Email Address" required>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password"
+                       placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="btn">
+                Register
+            </button>
+        </form>
+
+        <div class="link">
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+
+</body>
+</html>
